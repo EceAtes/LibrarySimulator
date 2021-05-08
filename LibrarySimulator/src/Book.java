@@ -1,6 +1,8 @@
 import  java.util.Arrays;
 import java.util.Calendar;
 public class Book {
+	final private int INITIAL_DUE_DATE = 12;  
+	
 	private String bookName,
 				   writer;
 	private int pubYear;
@@ -8,22 +10,42 @@ public class Book {
 				dueMonth,
 				dueYear;
 	
-	public Book( String bookName, String writer, int pubYear, int dueDay, int dueMonth, int dueYear) {
+	public Book( String bookName, String writer, int pubYear, int holdDay, int holdMonth, int holdYear) {
 		this.bookName = bookName;
 		this.writer = writer;
 		this.pubYear = pubYear;
-		this.dueDay = dueDay;
-		this.dueMonth = dueMonth;
-		this.dueYear = dueYear;
+		this.dueDay = holdDay + INITIAL_DUE_DATE;
+		this.dueMonth = holdMonth;
+		this.dueYear = holdYear;
+		
+		if( dueDay > 30 ) {
+			dueDay -= 30;
+			dueMonth++;
+		}
+		
+		if( dueMonth > 12) {
+			dueMonth -= 12;
+			dueYear++;
+		}
 	}
 	
 	public Book( String bookName, String writer, int pubYear ) {
 		this.bookName = bookName;
 		this.writer = writer;
 		this.pubYear = pubYear;
-		dueDay = Calendar.getInstance().get(Calendar.DATE);
+		dueDay = Calendar.getInstance().get(Calendar.DATE) + INITIAL_DUE_DATE;
 		dueMonth = Calendar.getInstance().get(Calendar.MONTH);
 		dueYear = Calendar.getInstance().get(Calendar.YEAR);
+		
+		if( dueDay > 30 ) {
+			dueDay -= 30;
+			dueMonth++;
+		}
+		
+		if( dueMonth > 12) {
+			dueMonth -= 12;
+			dueYear++;
+		}
 	}
 	
 	/**
@@ -43,7 +65,7 @@ public class Book {
 	}
 	
 	/**
-	 * 
+	 * trying
 	 * @param bookName
 	 */
 	public void setWriter( String writer) {
@@ -93,6 +115,14 @@ public class Book {
 		
 		output = dueDay + "/" + dueMonth + "/" + dueYear;
 		
+		return output;
+	}
+	
+	public String toString() {
+		String output;
+		
+		output = "Book name: " + this.bookName + " \nAuthor: " + this.writer + "\nPublished at: " + this.pubYear + "\nDue date: " + getDueDate();
+	
 		return output;
 	}
 	
