@@ -3,9 +3,9 @@ import java.util.Calendar;
 
 public class Member {
 	final private double DEBT_RATE_REGULAR = 0.5,
-						 DEBT_RATE_ADVANCED = 0.3;
+			     DEBT_RATE_ADVANCED = 0.3;
 	final private int DAYS_IN_MONTH = 30,
-					  DAYS_IN_YEAR = 360;
+			  DAYS_IN_YEAR = 360;
 					  
 	
 	
